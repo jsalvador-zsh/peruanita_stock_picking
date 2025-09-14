@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_form_inherit_dispatch_control" model="ir.ui.view">
+        <field name="name">stock.picking.form.dispatch.control</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="referral_guide" invisible="picking_type_code != 'incoming'" readonly="state in ('done', 'cancel')" />
+            </xpath>
+
+            <!-- Agregar la nueva página después del notebook existente -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Control de despacho" 
+                      name="dispatch_control"
+                      invisible="picking_type_code != 'outgoing'">
+                    
+                    <!-- DATOS GENERALES -->
+                    <group name="general_data" string="DATOS GENERALES">
+                        <group name="transport_info_left" col="2">
+                            <field name="transport_company_id" 
+                                   options="{'no_create': False, 'no_open': True}" readonly="state in ('done', 'cancel')"/>
+                            <field name="transport_phone" readonly="state in ('done', 'cancel')"/>
+                        </group>
+                        <group name="transport_info_right" col="2">
+                            <field name="vehicle_plate" readonly="state in ('done', 'cancel')"/>
+                        </group>
+                    </group>
+                    
+                    <!-- DOCUMENTACIÓN ENVIADA DEL PRODUCTO -->
+                    <group name="documentation" string="DOCUMENTACIÓN ENVIADA DEL PRODUCTO">
+                        <group name="certificates_left" col="2">
+                            <field name="declaration_sworn" readonly="state in ('done', 'cancel')"/>
+                            <field name="certificate_microbiological" readonly="state in ('done', 'cancel')"/>
+                            <field name="certificate_physical" readonly="state in ('done', 'cancel')"/>
+                        </group>
+                        <group name="certificates_right" col="2">
+                            <field name="certificate_organoleptic" readonly="state in ('done', 'cancel')"/>
+                            <field name="shipping_guide" readonly="state in ('done', 'cancel')"/>
+                        </group>
+                        <group name="other_docs" col="1" string="Observaciones">
+                            <field name="other_documents" 
+                                   placeholder="Ingrese notas sobre otros documentos enviados..."
+                                   nolabel="1" />
+                        </group>
+                    </group>
+                    
+                </page>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>
