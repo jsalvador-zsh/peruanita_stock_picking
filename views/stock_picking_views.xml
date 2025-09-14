@@ -34,11 +34,6 @@
                         <group name="certificates_left" col="2">
                             <field name="declaration_sworn" readonly="state in ('done', 'cancel')"/>
                             <field name="certificate_microbiological" readonly="state in ('done', 'cancel')"/>
-                            <field name="certificate_physical" readonly="state in ('done', 'cancel')"/>
-                        </group>
-                        <group name="certificates_right" col="2">
-                            <field name="certificate_organoleptic" readonly="state in ('done', 'cancel')"/>
-                            <field name="shipping_guide" readonly="state in ('done', 'cancel')"/>
                         </group>
                         <group name="other_docs" col="1" string="Observaciones">
                             <field name="other_documents" 

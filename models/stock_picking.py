@@ -31,21 +31,9 @@ class StockPicking(models.Model):
     )
     
     certificate_microbiological = fields.Boolean(
-        string='Certificado Microbiológico',
+        string='Certificados Microbiológicos, Físico y Organoléptico',
         default=False,
-        help='Indica si se envió el certificado microbiológico'
-    )
-    
-    certificate_physical = fields.Boolean(
-        string='Certificado Físico',
-        default=False,
-        help='Indica si se envió el certificado físico'
-    )
-    
-    certificate_organoleptic = fields.Boolean(
-        string='Certificado Organoléptico',
-        default=False,
-        help='Indica si se envió el certificado organoléptico'
+        help='Indica si se envió los certificados en mención'
     )
     
     shipping_guide = fields.Boolean(
