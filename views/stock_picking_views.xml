@@ -30,12 +30,12 @@
                     </group>
                     
                     <!-- DOCUMENTACIÓN ENVIADA DEL PRODUCTO -->
-                    <group name="documentation" string="DOCUMENTACIÓN ENVIADA DEL PRODUCTO">
-                        <group name="certificates_left" col="2">
+                    <group name="documentation">
+                        <group name="certificates_left" string="DOCUMENTACIÓN ENVIADA DEL PRODUCTO">
                             <field name="declaration_sworn" readonly="state in ('done', 'cancel')"/>
                             <field name="certificate_microbiological" readonly="state in ('done', 'cancel')"/>
                         </group>
-                        <group name="other_docs" col="1" string="Observaciones">
+                        <group name="other_docs" string="OBSERVACIONES">
                             <field name="other_documents" 
                                    placeholder="Ingrese notas sobre otros documentos enviados..."
                                    nolabel="1" />

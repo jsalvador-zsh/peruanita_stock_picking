@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_picking_form_inherit_temperature_control" model="ir.ui.view">
+    <field name="name">stock.picking.list.temperature.control</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form" />
+    <field name="arch" type="xml">
+
+      <!-- Agregar la nueva página después del notebook existente -->
+      <xpath expr="//notebook" position="inside">
+        <page string="Control de temperatura y humedad"
+          name="temperature_control"
+          invisible="picking_type_code != 'outgoing'">
+          <field name="temperature_control_ids" nolabel="1" readonly="state in ('done', 'cancel')">
+            <list string="Control de Temperatura" editable="bottom">
+              <field name="stage" string="Tiempo" />
+              <field name="time_hour" string="Tiempo/Hora" />
+              <field name="temperature" string="T °C" />
+              <field name="humidity" string="% HR" />
+              <field name="responsible_user" string="Responsable" />
+              <field name="notes" string="Observaciones" />
+            </list>
+          </field>
+
+        </page>
+      </xpath>
+
+    </field>
+  </record>
+
+</odoo>

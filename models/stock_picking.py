@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
 
-
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
@@ -46,6 +45,38 @@ class StockPicking(models.Model):
         string='Otros Documentos',
         help='Notas adicionales sobre otros documentos enviados'
     )
+
+    # Relación One2many con los controles de temperatura
+    temperature_control_ids = fields.One2many(
+        'stock.temperature.control', 
+        'picking_id', 
+        string='Control de Temperatura'
+    )
+    
+    @api.model
+    def create(self, vals):
+        """Crear registros de temperatura automáticamente al crear un picking"""
+        picking = super(StockPicking, self).create(vals)
+        # Solo crear para pickings de tipo outgoing e incoming
+        if picking.picking_type_id.code in ['outgoing', 'incoming']:
+            self.env['stock.temperature.control'].create_default_records(picking.id)
+        return picking
+    
+    def write(self, vals):
+        """Si se cambia el tipo de picking, crear o eliminar registros de temperatura"""
+        result = super(StockPicking, self).write(vals)
+        
+        if 'picking_type_id' in vals:
+            for picking in self:
+                if picking.picking_type_id.code in ['outgoing', 'incoming']:
+                    # Si no tiene registros de temperatura, crearlos
+                    if not picking.temperature_control_ids:
+                        self.env['stock.temperature.control'].create_default_records(picking.id)
+                else:
+                    # Si ya no es outgoing/incoming, eliminar registros de temperatura
+                    picking.temperature_control_ids.unlink()
+        
+        return result
 
     # Control de recepción
     referral_guide = fields.Char(string='Guía de remisión', help='Guía de remisión del proveedor')

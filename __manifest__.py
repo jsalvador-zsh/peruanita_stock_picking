@@ -12,12 +12,14 @@
         - Campos para datos generales de transporte
         - Control de documentación enviada del producto
     """,
-    'author': 'Tu Empresa',
-    'website': 'https://www.tuempresa.com',
+    'author': 'Juan Salvador',
+    'website': 'https://jsalvador.dev',
     'category': 'Inventory/Inventory',
     'depends': ['stock'],
     'data': [
+        'security/ir.model.access.csv',
         'views/stock_picking_views.xml',
+        'views/stock_temperature_control_views.xml'
     ],
     'installable': True,
     'auto_install': False,
