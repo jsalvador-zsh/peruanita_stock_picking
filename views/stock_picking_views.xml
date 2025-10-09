@@ -44,6 +44,19 @@
                     
                 </page>
             </xpath>
+
+            <!-- Hacer visible el campo product_packaging_id sin restricción de grupo -->
+            <xpath expr="//field[@name='move_ids_without_package']//list//field[@name='product_packaging_id']" position="attributes">
+                <attribute name="groups"></attribute>
+                <attribute name="optional">show</attribute>
+            </xpath>
+
+            <!-- Agregar el campo de cantidad de embalaje después del embalaje -->
+            <xpath expr="//field[@name='move_ids_without_package']//list//field[@name='product_packaging_id']" position="after">
+                <field name="product_packaging_qty" string="Cant. Embalaje" optional="show" 
+                       readonly="not product_packaging_id"
+                       invisible="not product_packaging_id"/>
+            </xpath>
             
         </field>
     </record>
