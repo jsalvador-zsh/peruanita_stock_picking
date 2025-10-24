@@ -40,6 +40,13 @@ class StockPicking(models.Model):
         default=False,
         help='Indica si se envió la guía de remisión'
     )
+
+    # Número o valor de la guía de remisión (para pickings de salida)
+    shipping_guide_number = fields.Char(
+        string='Nº Guía de Remisión',
+        help='Número o valor de la guía de remisión asociada a la entrega',
+        readonly=False
+    )
     
     other_documents = fields.Text(
         string='Otros Documentos',
