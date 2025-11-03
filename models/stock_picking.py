@@ -4,6 +4,11 @@ from odoo import api, fields, models
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    distributor_id = fields.Many2one(
+        'res.partner',
+        string='Distribuidor',
+        help='Distribuidor asociado a esta operación de inventario'
+    )
     # Control de despacho
     transport_company_id = fields.Many2one(
         'res.partner',
@@ -39,6 +44,13 @@ class StockPicking(models.Model):
         string='Guía de Remisión',
         default=False,
         help='Indica si se envió la guía de remisión'
+    )
+
+    # Número o valor de la guía de remisión (para pickings de salida)
+    shipping_guide_number = fields.Char(
+        string='Nº Guía de Remisión',
+        help='Número o valor de la guía de remisión asociada a la entrega',
+        readonly=False
     )
     
     other_documents = fields.Text(

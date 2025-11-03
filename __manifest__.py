@@ -15,7 +15,7 @@
     'author': 'Juan Salvador',
     'website': 'https://jsalvador.dev',
     'category': 'Inventory/Inventory',
-    'depends': ['stock'],
+    'depends': ['stock','l10n_pe_edi_picking'],
     'data': [
         'security/ir.model.access.csv',
         'views/stock_picking_views.xml',
